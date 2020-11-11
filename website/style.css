@@ -25,7 +25,7 @@ body{
 }
 
 #entryHolder{
-
+    text-align: center;
 }
 
 #date{
@@ -44,7 +44,8 @@ body{
 
 }
 .title{
-
+    text-align: center;
+    font-weight: bold;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */

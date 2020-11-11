@@ -1,6 +1,6 @@
 /* Global Variables */
-const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?zip='
-const apiKey = '&appid=f50b92f68a3ef12227183f971c30810b';
+const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const apikey = '&appid=<YOUR_API_KEY>&units=metric'; 
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -12,7 +12,7 @@ function handleClick(e) {
     getUserData().then(function(data) {
         return postData('/post', data);
     }).then(function(data) {
-        updateUi(data);
+        updateUi('/get');
     });
 }
 
@@ -62,8 +62,21 @@ async function postData(path, data) {
     }
 }
 
-async function updateUi(data) {
-    document.getElementById('date').innerHTML = data['date'];
-    document.getElementById('temp').innerHTML = data['temperature'];
-    document.getElementById('content').innerHTML = data['userResponse'];
+async function updateUi(path) {
+    let res = await fetch(path, {
+        method: 'GET',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    try {
+        let data = await res.json();
+        document.getElementById('date').innerHTML = data['date'];
+        document.getElementById('temp').innerHTML = data['temperature'];
+        document.getElementById('content').innerHTML = data['userResponse'];
+    } catch (error) {
+        console.log(error);
+    }
 }
