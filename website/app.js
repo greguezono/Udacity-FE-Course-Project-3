@@ -18,7 +18,13 @@ function handleClick(e) {
 
 async function getUserData () {
     let zip = document.getElementById('zip').value;
+    if (!zip) {
+        alert("Please enter a zip code.");
+    }
     let userResponse = document.getElementById('feelings').value;
+    if (!userResponse) {
+        alert("Please enter a reflection.");
+    }
     let data = getWeatherData(baseUrl, apiKey, zip, userResponse);
     return data;
 }
